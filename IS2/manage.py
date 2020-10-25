@@ -17,6 +17,8 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-
+'''
+petko es tontito y su pajaro no
+'''
 if __name__ == '__main__':
     main()
