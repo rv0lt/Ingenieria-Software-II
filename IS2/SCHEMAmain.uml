@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>4d4d811f-1a8b-4ab5-898d-226734122db4.SCHEMA:main</OriginalElement>
+  <nodes>
+    <node x="8.5" y="0.0">4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_marca</node>
+    <node x="98.0" y="772.0">4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_factura</node>
+    <node x="4.5" y="127.0">4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_modelo</node>
+    <node x="0.0" y="287.0">4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_coche</node>
+    <node x="173.0" y="276.0">4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_cliente</node>
+    <node x="98.0" y="557.0">4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_reserva</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_reserva" target="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_cliente">
+      <point x="38.0" y="-82.5" />
+      <point x="212.0" y="532.0" />
+      <point x="271.5" y="532.0" />
+      <point x="0.0" y="115.5" />
+    </edge>
+    <edge source="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_modelo" target="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_marca">
+      <point x="0.0" y="-49.5" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_reserva" target="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_coche">
+      <point x="-38.0" y="-82.5" />
+      <point x="136.0" y="532.0" />
+      <point x="76.5" y="532.0" />
+      <point x="0.0" y="104.5" />
+    </edge>
+    <edge source="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_factura" target="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_reserva">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_coche" target="4d4d811f-1a8b-4ab5-898d-226734122db4.TABLE:main.Backend_modelo">
+      <point x="0.0" y="-104.5" />
+      <point x="0.0" y="49.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5686274509803921" x="638.5" y="541.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+

@@ -3,6 +3,8 @@ from django import forms
 from django.core.validators import MaxValueValidator, MinValueValidator
 import datetime
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import hashers
+from django.contrib.auth.hashers import PBKDF2SHA1PasswordHasher as psph
 
 
 class Marca(models.Model):
@@ -29,6 +31,7 @@ class Cliente(models.Model):
     ]
     nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=100)
+    contrasena = models.CharField(max_length=30)
     tipo = models.CharField(choices=TIPO_CLIENTE, default=PARTICULAR, max_length=1)
     edad = models.PositiveIntegerField(default=18)
     tarjeta_credito = models.CharField(max_length=16)
@@ -37,6 +40,10 @@ class Cliente(models.Model):
 
     def __str__(self):
         return str(self.nombre+"-"+str(self.id))
+'''
+    def save(self):
+        self.contrasena = hashers.make_password(password=str(self.contrasena))
+        super(Cliente, self).save()'''
 
 
 class Coche(models.Model):
@@ -58,7 +65,7 @@ class Coche(models.Model):
     techo = models.CharField(choices=[('N', 'Normal'), ('C', 'Cabrio-Descapotable'), ('S', 'Solar-Panoramico')], max_length=1)
     transmision = models.CharField(max_length=1, choices=[('M', 'Manual'), ('A', 'Automatico')])
     estado = models.CharField(max_length=1, choices=ESTADO_COCHE, default=DISPONIBLE)
-    calendario = models.JSONField()
+    calendario = models.JSONField()  # JSON que contendra los dias en los que el coche esta reservado o de baja
 
     def __str__(self):
         return str(Modelo.objects.get(id=self.modelo.id))+"-"+str(self.id)+"-"+str(self.estado)
