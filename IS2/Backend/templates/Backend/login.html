@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'Backend/login.scss' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <video autoplay muted loop id="bgVideo">
+        <source src="https://www.bmw.com/video/is/content/BMW/bmwcom/bmw_com/category/Automotive%20Life/dj/dj-00-teaser-hd.mp4" type="video/mp4">
+    </video>
+    <div class="login">
+        <form class="form" method="POST" action="">
+            {% csrf_token %}
+            <h2>Bienvenido boludo</h2>
+            <input type="text" placeholder="Id Usuario (DNI)">
+            <input type="password" placeholder="Password">
+            <input type="submit" value="Sign In" class="submit" href="">
+            <p>No tenés una cuenta? <a href="{% url 'register' %}">registrate acá</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -40,6 +40,8 @@ class Cliente(models.Model):
 
     def __str__(self):
         return str(self.nombre+"-"+str(self.id))
+
+
 '''
     def save(self):
         self.contrasena = hashers.make_password(password=str(self.contrasena))
@@ -78,7 +80,7 @@ class Reserva(models.Model):
     fecha_reserva = models.DateField(default=datetime.date.today)
     fecha_objetivo = models.DateField()
 
-    def getPrecio(self):
+    def get_precio(self):
         return self.precio
 
     def __str__(self):

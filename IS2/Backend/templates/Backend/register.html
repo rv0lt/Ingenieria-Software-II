@@ -1,0 +1,36 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'Backend/register.scss' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+</head>
+    <video autoplay muted loop id="bgVideo">
+        <source src="https://www.bmw.com/video/is/content/BMW/bmwcom/bmw_com/category/Automotive%20Life/dj/dj-00-teaser-hd.mp4" type="video/mp4">
+    </video>
+    <div class="login">
+        <form class="form">
+            {% csrf_token %}
+            <h2>Regitrate de una maldita vez pendejo</h2>
+            <input type="text" placeholder="Nombre">
+            <input type="text" placeholder="Apellidos">
+            <input type="password" placeholder="Password">
+            <input type="number" placeholder="Edad">
+            <input type="text" placeholder="Tarjeta de Credito">
+            <input type="text" placeholder="Carnet">
+
+            <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+                <label for="toggle-on" class="btn">Particular</label>
+            <input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+                <label for="toggle-off" class="btn">Empresa</label>
+
+            <input class="radio">
+            <input class="radio">
+
+            <input type="submit" value="Register" class="submit">
+            <p>Ya tenés una cuenta? <a href="{% url 'login' %}">iniciá sesion boludo</a></p>
+        </form>
+    </div>
+</body>
+</html>
