@@ -16,23 +16,21 @@
             <input type="text" placeholder="Nombre">
             <input type="text" placeholder="Apellidos">
             <input type="password" placeholder="Password">
-            <input type="number" placeholder="Edad" >
+            <input type="number" placeholder="Edad" min="16" max="100">
             <input type="text" placeholder="Tarjeta de Credito">
-            <input type="text" placeholder="Carnet">
-            <!--
-            <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
-                <label for="toggle-on" class="btn">Particular</label>
-            <input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
-                <label for="toggle-off" class="btn">Empresa</label>
-            -->
-            <div class="box">
-              <input type="radio" id="radio1" name="radio1"/>
-              <label for="radio1">Particular</label>
-
-              <input type="radio" id="radio2" name="radio1"/>
-              <label for="radio2">Empresa</label>
+            <input type="text" placeholder="Carnet" pattern="(([x-z]|[X-Z]{1})([-]?)(\d{7})([-]?)([a-z]|[A-Z]{1}))|((\d{8})([-]?)([a-z]|[A-Z]{1}))">
+            <span></span>
+            <div class="radio" id="radio_containter">
+                <label class="container">Particular
+                  <input type="radio" checked="checked" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Empresa
+                  <input type="radio" name="radio">
+                  <span class="checkmark"></span>
+                </label>
             </div>
-
+            <input type="submit" value="Register" class="submit" href="{% url 'user home'%}">
             <p>Ya tenés una cuenta? <a href="{% url 'login' %}">iniciá sesion boludo</a></p>
         </form>
     </div>

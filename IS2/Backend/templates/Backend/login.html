@@ -16,7 +16,7 @@
             <h2>Bienvenido boludo</h2>
             <input type="text" placeholder="Id Usuario (DNI)">
             <input type="password" placeholder="Password">
-            <input type="submit" value="Sign In" class="submit" href="">
+            <input type="submit" value="Sign In" class="submit" href="{% url 'user home' %}">
             <p>No tenés una cuenta? <a href="{% url 'register' %}">registrate acá</a></p>
         </form>
     </div>

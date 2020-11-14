@@ -19,7 +19,7 @@
   //box-sizing: border-box;
   font-family: Roboto, sans-serif;
   width: 20%;
-  height: 81%;
+  height: 91%;
   border: 1px solid #CCC;
   background: url('http://68.media.tumblr.com/2b27908fac782ca54cc2b3aff6862423/tumblr_mra3owkIhC1ro855no1_500.gif') center center no-repeat;
   //background: rgba(50,50,50,0.8);
@@ -87,99 +87,70 @@
   font-family: Roboto, sans-serif;
 }
 
-.box{
-  width: 100%;
-  max-width: 400px;
-  margin: 2rem auto;
-  background: white;
-  border: 1px solid white;
-  border-radius: 3px;
-  text-align: left;
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  //font-size: 22px;
+  color: white;
+  font: inherit;
+  font-weight: lighter;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-input[type=radio]{
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
   display: none;
 }
 
-.active-label{
-  color: aquamarine;
-
-  &:before{
-    background: white;
-    border-color: aquamarine;
-  }
-}
-
-/**
- * Make those labels sexy
- */
-label{
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1;
-  cursor: pointer;
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
   display: block;
-  padding: 1rem 1rem 1rem 3rem;
-  position: relative;
-  border-top: 1px solid rgba(black,.1);
-  background: white;
-  //whitespace: no-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: all .15s ease;
-
-  &:focus,
-  &:hover,
-  &:active{
-    @extend .active-label;
-  }
-
-  &:first-of-type{
-    border: 0;
-  }
-
-  /**
-   * This is the radio fake dot basically
-   */
-  &:before{
-    content: "";
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: .2rem solid #ccc;
-  }
 }
 
-/**
- * How it should look when checked
- */
-input:checked + label{
-  @extend .active-label;
-
-  &:before{
-    border-color: white;
-    border: none;
-    background: aquamarine;
-  }
-}
-
-/**
- * How it should look when disabled
- */
-input:disabled + label{
-  background: #efefef;
-  color: rgba(black,.5);
-  cursor: not-allowed;
-
-  &:hover{
-    border-color: rgba(black,.1);
-  }
-
-  &:before{
-    border-color: white;
-    background: white;
-  }
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 7px;
+	left: 7px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: white;
 }
