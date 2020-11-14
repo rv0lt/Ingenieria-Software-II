@@ -16,19 +16,23 @@
             <input type="text" placeholder="Nombre">
             <input type="text" placeholder="Apellidos">
             <input type="password" placeholder="Password">
-            <input type="number" placeholder="Edad">
+            <input type="number" placeholder="Edad" >
             <input type="text" placeholder="Tarjeta de Credito">
             <input type="text" placeholder="Carnet">
-
+            <!--
             <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
                 <label for="toggle-on" class="btn">Particular</label>
             <input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
                 <label for="toggle-off" class="btn">Empresa</label>
+            -->
+            <div class="box">
+              <input type="radio" id="radio1" name="radio1"/>
+              <label for="radio1">Particular</label>
 
-            <input class="radio">
-            <input class="radio">
+              <input type="radio" id="radio2" name="radio1"/>
+              <label for="radio2">Empresa</label>
+            </div>
 
-            <input type="submit" value="Register" class="submit">
             <p>Ya tenés una cuenta? <a href="{% url 'login' %}">iniciá sesion boludo</a></p>
         </form>
     </div>

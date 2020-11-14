@@ -5,6 +5,7 @@
   font-family: Roboto, sans-serif;
 }
 
+
 #bgVideo{
   //background: url(https://www.bmw.com/video/is/content/BMW/bmwcom/bmw_com/category/Automotive%20Life/dj/dj-00-teaser-hd.mp4);
   position: fixed;
@@ -20,12 +21,12 @@
   width: 20%;
   height: 81%;
   border: 1px solid #CCC;
-  //background: $fg;
-  //background: url('http://68.media.tumblr.com/2b27908fac782ca54cc2b3aff6862423/tumblr_mra3owkIhC1ro855no1_500.gif') center center no-repeat;
-  background: rgba(50,50,50,0.8);
+  background: url('http://68.media.tumblr.com/2b27908fac782ca54cc2b3aff6862423/tumblr_mra3owkIhC1ro855no1_500.gif') center center no-repeat;
+  //background: rgba(50,50,50,0.8);
   background-size: cover;
   min-width: 250pt;
-  margin-top: 5%;
+  min-height: 80%;
+  margin-top: 2%;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -53,7 +54,7 @@
   font-size: small;
 }
 .login a{
-  color: aquamarine;
+  color: #7fffd4;
 }
 
 .login .form input {
@@ -86,53 +87,99 @@
   font-family: Roboto, sans-serif;
 }
 
-.btn{
-    border: 3px solid #1a1a1a;
-    display: inline-block;
-    padding: 10px;
-    position: relative;
-    text-align: center;
-    transition: background 600ms ease, color 600ms ease;
+.box{
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  background: white;
+  border: 1px solid white;
+  border-radius: 3px;
+  text-align: left;
 }
 
-input[type="radio"].toggle {
-    display: none;
-    & + label{
-        cursor: pointer;
-        min-width: 60px;
-        &:hover{
-            background: none;
-            color: #1a1a1a;
-        }
-        &:after{
-            background: #1a1a1a;
-            content: "";
-            height: 100%;
-            position: absolute;
-            top: 0;
-            transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-            width: 100%;
-            z-index: -1;
-        }
-    }
-    &.toggle-left + label {
-        border-right: 0;
-        &:after{
-            left: 100%
-        }
-    }
-    &.toggle-right + label{
-        margin-left: -5px;
-        &:after{
-            left: -100%;
-        }
-    }
-    &:checked + label {
-        cursor: default;
-        color: #fff;
-        transition: color 200ms;
-        &:after{
-            left: 0;
-        }
-    }
+input[type=radio]{
+  display: none;
+}
+
+.active-label{
+  color: aquamarine;
+
+  &:before{
+    background: white;
+    border-color: aquamarine;
+  }
+}
+
+/**
+ * Make those labels sexy
+ */
+label{
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  display: block;
+  padding: 1rem 1rem 1rem 3rem;
+  position: relative;
+  border-top: 1px solid rgba(black,.1);
+  background: white;
+  //whitespace: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all .15s ease;
+
+  &:focus,
+  &:hover,
+  &:active{
+    @extend .active-label;
+  }
+
+  &:first-of-type{
+    border: 0;
+  }
+
+  /**
+   * This is the radio fake dot basically
+   */
+  &:before{
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: .2rem solid #ccc;
+  }
+}
+
+/**
+ * How it should look when checked
+ */
+input:checked + label{
+  @extend .active-label;
+
+  &:before{
+    border-color: white;
+    border: none;
+    background: aquamarine;
+  }
+}
+
+/**
+ * How it should look when disabled
+ */
+input:disabled + label{
+  background: #efefef;
+  color: rgba(black,.5);
+  cursor: not-allowed;
+
+  &:hover{
+    border-color: rgba(black,.1);
+  }
+
+  &:before{
+    border-color: white;
+    background: white;
+  }
 }

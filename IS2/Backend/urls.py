@@ -5,5 +5,5 @@ urlpatterns = [
     path('login/', views.login, name="login"),
     path('', views.home),
     path('register/', views.register, name="register"),
-    # path('{user}/start/', views.start,)
+    path('<int:user_id>/start/', views.start, name="user home")
 ]
