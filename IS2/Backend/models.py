@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ValidationError
 import datetime
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import hashers
@@ -41,7 +42,34 @@ class Cliente(models.Model):
     def __str__(self):
         return str(self.nombre+"-"+str(self.id))
 
-
+    def validate_tarjeta(self, value):
+        #Validate using the Luhn algorithm
+        #https://en.wikipedia.org/wiki/Luhn_algorithm        
+        #Check if there are just only 16 chars
+        if len(value) != 16:
+            raise ValidationError(
+            _('%(value)s has not 16 digits'),
+            params={'value': value},
+        )
+        #Check if value is a number
+        try:
+            value = int(value)
+        except ValueError:
+            raise ValidationError(
+            _('%(value)s is not a number'),
+            params={'value': value},
+        )
+        
+        checksum, factor= 0,1
+        for c in reversed(value):
+            for c in str(factor * (int(c))):
+                checksum+=int(c)
+            factor=3-factor
+        if checksum %10 != 0:
+            raise ValidationError(
+            _('%(value)s is not correct'),
+            params={'value': value},
+        )         
 '''
     def save(self):
         self.contrasena = hashers.make_password(password=str(self.contrasena))
