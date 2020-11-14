@@ -60,16 +60,15 @@ class Cliente(models.Model):
             params={'value': value},
         )
         
-        checksum, factor= 0,1
+        checksum, factor = 0, 1
         for c in reversed(value):
             for c in str(factor * (int(c))):
-                checksum+=int(c)
-            factor=3-factor
+                checksum += int(c)
+            factor = 3-factor
         if checksum %10 != 0:
-            raise ValidationError(
-            _('%(value)s is not correct'),
-            params={'value': value},
-        )         
+            raise ValidationError(_('%(value)s is not correct'), params={'value': value},)
+
+
 '''
     def save(self):
         self.contrasena = hashers.make_password(password=str(self.contrasena))
