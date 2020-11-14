@@ -10,12 +10,13 @@
         <source src="https://www.bmw.com/video/is/content/BMW/bmwcom/bmw_com/category/Automotive%20Life/dj/dj-00-teaser-hd.mp4" type="video/mp4">
     </video>
     <div class="login">
-        <form class="form">
+        <form class="form" action="/register/" method="post">
             {% csrf_token %}
             <h2>Regitrate de una maldita vez pendejo</h2>
             <input type="text" placeholder="Nombre">
             <input type="text" placeholder="Apellidos">
-            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Contraseña" id="password1">
+            <input type="password" placeholder="Repetir contraseña" id="password2">
             <input type="number" placeholder="Edad" min="16" max="100">
             <input type="text" placeholder="Tarjeta de Credito">
             <input type="text" placeholder="Carnet" pattern="(([x-z]|[X-Z]{1})([-]?)(\d{7})([-]?)([a-z]|[A-Z]{1}))|((\d{8})([-]?)([a-z]|[A-Z]{1}))">
