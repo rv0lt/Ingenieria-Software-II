@@ -21,12 +21,12 @@ $borderWidth: 3px;
   //box-sizing: border-box;
   font-family: Roboto, sans-serif;
   width: 20%;
-  height: 350pt;
+  height: 50%;
   border: 1px solid #CCC;
   //background: rgba(50,50,50,0.8);
   background: url('http://68.media.tumblr.com/2b27908fac782ca54cc2b3aff6862423/tumblr_mra3owkIhC1ro855no1_500.gif') center center no-repeat;
   background-size: cover;
-  min-width: 250pt;
+  min-width: 350pt;
   margin-top: 10%;
   margin-left: auto;
   margin-right: auto;
@@ -46,7 +46,7 @@ $borderWidth: 3px;
   font-weight: normal;
   font-size: xx-large;
   margin-top: 60px;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .login p{

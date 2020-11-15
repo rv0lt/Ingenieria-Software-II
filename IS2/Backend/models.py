@@ -36,7 +36,7 @@ class Cliente(models.Model):
     tipo = models.CharField(choices=TIPO_CLIENTE, default=PARTICULAR, max_length=1)
     edad = models.PositiveIntegerField(default=18)
     tarjeta_credito = models.CharField(max_length=16)
-    carnet_de_conducir = models.CharField(max_length=9)  # dni?
+    carnet_de_conducir = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=300)
 
     def __str__(self):
@@ -67,11 +67,12 @@ class Cliente(models.Model):
             factor = 3-factor
         if checksum %10 != 0:
             raise ValidationError(_('%(value)s is not correct'), params={'value': value},)
-
-
 '''
+    def hash(password):
+        return hashers.make_password(password=str(password))
+
     def save(self):
-        self.contrasena = hashers.make_password(password=str(self.contrasena))
+        self.contrasena = self.hash(self.contrasena)
         super(Cliente, self).save()'''
 
 
