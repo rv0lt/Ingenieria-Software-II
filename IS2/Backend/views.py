@@ -43,7 +43,7 @@ def register(request):
             form.save()
             uid = form.get_user_id()
             messages.success(request, 'User {} created'.format(uid))
-            return redirect('user home', form.get_user_id())
+            return redirect('user home', Cliente.objects.get(id=uid).id)
         else:
             messages.error(request, 'Wrong Form data')
             return render(request, 'Backend/register.html', context={'form': RegisterUserForm})
