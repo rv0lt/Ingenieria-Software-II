@@ -102,11 +102,14 @@ class Coche(models.Model):
 
 
 class Reserva(models.Model):
+    FRANQUICIAS = [('1', 'oficina 1'), ('2', 'oficina 2'), ('3', 'oficina 3'), ('4', 'oficina 4')]
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     coche = models.ForeignKey(Coche, on_delete=models.CASCADE)
     precio = models.FloatField(validators=[MinValueValidator(0.00)])
     fecha_reserva = models.DateField(default=datetime.date.today)
     fecha_objetivo = models.DateField()
+    franquicia_recogida = models.CharField(max_length=30, choices=FRANQUICIAS, default='1')
+    franquicia_entrega = models.CharField(max_length=30, choices=FRANQUICIAS, default='1')
 
     def get_precio(self):
         return self.precio
