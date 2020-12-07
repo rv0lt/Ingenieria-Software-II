@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import Cliente
+from .models import Cliente, Coche
 from django import forms
 from django.forms import ModelForm, CharField, IntegerField, PasswordInput, NumberInput
 
@@ -67,3 +67,15 @@ class LoginUserForm(forms.Form):
         # return Cliente.objects.get(carnet_de_conducir=self.user_id).contrasena == Cliente.hash(self.password)
         return Cliente.objects.get(carnet_de_conducir=self.cleaned_data['user_id']).contrasena == self.cleaned_data['password']
 '''
+class DateInput(forms.DateInput):
+    input_type='date'
+class reservaForm(forms.Form):
+    FRANQUICIAS = [('1', 'oficina 1'), ('2', 'oficina 2'), ('3', 'oficina 3'), ('4', 'oficina 4')]
+
+    car = forms.ModelChoiceField(queryset= Coche.objects.all().order_by('modelo'))
+    date_recogida = forms.DateField(widget=DateInput)
+    date_deposicion = forms.DateField(widget=DateInput)
+    franquicia_recogida= forms.ModelChoiceField(queryset=FRANQUICIAS)
+    franquicia_desposicion = forms.ModelChoiceField(queryset=FRANQUICIAS)
+    ##TODO EXTRAS
+     
