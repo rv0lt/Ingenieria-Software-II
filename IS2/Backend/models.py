@@ -89,13 +89,14 @@ class Coche(models.Model):
         (BAJA, 'Baja'),
         (RESERVADO, 'Reservado'),
     ]
+    CALENDARIO_DEFAULT = {datetime.date.today(), 'D'}
     modelo = models.ForeignKey(Modelo, on_delete=models.DO_NOTHING)
     categoria = models.CharField(choices=[('A', 'Alta'), ('M', 'Media'), ('B', 'Baja')], max_length=1)
     puertas = models.IntegerField(choices=[(3, 3), (5, 5)])
     techo = models.CharField(choices=[('N', 'Normal'), ('C', 'Cabrio-Descapotable'), ('S', 'Solar-Panoramico')], max_length=1)
     transmision = models.CharField(max_length=1, choices=[('M', 'Manual'), ('A', 'Automatico')])
     estado = models.CharField(max_length=1, choices=ESTADO_COCHE, default=DISPONIBLE)
-    calendario = models.JSONField()  # JSON que contendra los dias en los que el coche esta reservado o de baja
+    calendario = models.JSONField(default=str(CALENDARIO_DEFAULT))  # JSON que contendra los dias en los que el coche esta reservado o de baja
 
     def __str__(self):
         return str(Modelo.objects.get(id=self.modelo.id))+"-"+str(self.id)+"-"+str(self.estado)

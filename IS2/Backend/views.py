@@ -5,7 +5,7 @@ from django.contrib import messages
 # Create your views here.
 from .models import *
 from .forms import RegisterUserForm, LoginUserForm
-
+from django.views.generic import ListView
 
 def login(request):
     form = LoginUserForm
@@ -55,5 +55,21 @@ def register(request):
 def start(request, pk):
     if Cliente.objects.get(id=pk) is None:
         raise Http404('Usuario no registrado')
-    context = {}  # pasarle pk para renderizar la vista correspondiente a cada usuario
-    return render(request, 'Backend/startpage.html')
+    context = {'cliente': Cliente.objects.get(id=pk), 'today': datetime.date.today(), 'marcas': Marca.objects.all(),
+               'gamas': [('A', 'Alta'), ('M', 'Media'),
+                         ('B', 'Baja')]}
+
+    marca = request.GET.get('marcas', '')
+    gama = request.GET.get('gamas', '')
+    fecha_ini = request.GET.get('fecha_start', datetime.date.today())
+    fecha_fin = request.GET.get('fecha_end', datetime.date.today())
+    queryset = Coche.objects.all()
+    if gama != '':
+        context['current_gama'] = gama
+        queryset = [i for i in queryset if i.categoria == gama[0]]
+    if marca != '':
+        context['current_marca'] = marca
+        queryset = [i for i in queryset if i.modelo.marca_fk.marca == marca]
+    context['object_list'] = queryset
+    # TODO: Filtrar fechas de coches disponibles
+    return render(request, 'Backend/startpage.html', context)
