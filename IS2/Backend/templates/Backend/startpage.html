@@ -8,16 +8,18 @@
     <h3>Bienvenido {{ cliente.nombre }}</h3>
     <hr>
     <div class="container">
-        <div class="btn-group-vertical">
-            <button type="button" class="btn btn-primary">Consultar Tarifas</button>
-            <div>
-            <button type="button" class="btn btn-primary">Crear Reserva</button>
-            </div>
-            <button type="button" class="btn btn-primary">Mis reservas</button>
-        </div>
+        <form action="{%  url 'tarifas' pk %}">
+            <input type="submit" value="Consultar Tarifas">
+        </form>
+        <form action="{%  url 'create reserva' pk %}">
+            <input type="submit" value="Crear Reserva">
+        </form>
+        <form action="{%  url 'reservas' pk %}">
+            <input type="submit" value="Mis Reservas">
+        </form>
     </div>
     <hr>
-    <form id="filtros" action="{% url 'user home' 1 %}">
+    <form id="filtros" action="{% url 'user home' pk %}">
         <div id="date_selector">
             Fecha inicio: <input type="date" id="start" name="fecha_start" value={{ today }} min={{ today }}>
             Fecha final: <input type="date" id="end" name="fecha_end" value={{ today }} min={{ today }}>

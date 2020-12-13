@@ -5,6 +5,20 @@
     <title>Tarifas</title>
 </head>
 <body>
-<H2>LISTA DE TARIFAS [TODO]</H2>
+<H2>LISTA DE TARIFAS</H2>
+<hr>
+<div class="list-group">
+    <u1>
+    {% block content %}
+        {% for t in tarifas %}
+            <p>ID Tarifa:{{ t.id }}</p>
+            <p>Numero de Dias:{{ t.n_dias }} {% if t.fin_semana_bool %} | Fin de semana incluido {% endif %}</p>
+            <p>{{ t.n_kilometros }} km | Gama: {{ t.gama_coche }} {% if t.cliente_empresa %}| Para Empresa{% else %}| Para Particular{% endif %}</p>
+            <p>Extras: {% if not t.lista_extras == '{}' %}{{ t.lista_extras }}{% else %}Ninguno{% endif %}</p>
+            <hr>
+        {% endfor %}
+    {% endblock %}
+    </u1>
+</div>
 </body>
 </html>

@@ -5,6 +5,22 @@
     <title>Mis Reservas</title>
 </head>
 <body>
-<h2>VER MIS RESERVAS [TODO]</h2>
+<h2>Las reservas de {{ cliente.nombre }}</h2>
+<div class="list-group">
+    <u1>
+    {% block content %}
+        {% for r in lista_reservas %}
+            <p>ID Reserva:{{ r.id }} | Precio:{{ r.precio }}</p>
+            <p> Fecha reserva: {{ r.fecha_reserva }} | Fecha inicio: {{ r.fecha_objetivo }}</p>
+            <p>Coche reservado: {{ r.coche }}</p>
+            <p>Franquicia entrega: {{ r.franquicia_entrega }} | Franquicia recogida: {{ r.franquicia_recogida }}</p>
+            <form action="{% url 'factura generador' pk r.id %}">
+                <input type="submit" value="Generar Factura">
+            </form>
+            <hr>
+        {% endfor %}
+    {% endblock %}
+    </u1>
+</div>
 </body>
 </html>

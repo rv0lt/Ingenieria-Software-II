@@ -20,7 +20,7 @@ class Modelo(models.Model):
     modelo = models.CharField(max_length=100)
 
     def __str__(self):
-        return str(Marca.objects.get(id=self.marca_fk.id)) + self.modelo
+        return str(Marca.objects.get(id=self.marca_fk.id)) + ' ' + self.modelo
 
 
 class Cliente(models.Model):
@@ -99,7 +99,7 @@ class Coche(models.Model):
     calendario = models.JSONField(default=str(CALENDARIO_DEFAULT))  # JSON que contendra los dias en los que el coche esta reservado o de baja
 
     def __str__(self):
-        return str(Modelo.objects.get(id=self.modelo.id))+"-"+str(self.id)+"-"+str(self.estado)
+        return str(Modelo.objects.get(id=self.modelo.id))+"-"+str(self.id)
 
 
 class Reserva(models.Model):
@@ -133,7 +133,7 @@ class Factura(models.Model):
         (AMERICANEXPRESS, 'American Express'),
     ]
 
-    id_reserva = models.ForeignKey(Reserva, on_delete=models.DO_NOTHING)
+    id_reserva = models.ForeignKey(Reserva, on_delete=models.DO_NOTHING, unique=True)
     fecha = models.DateTimeField(default=datetime.date.today, editable=False)
     importe = models.FloatField(default=None, editable=False)
     pago = models.CharField(choices=TIPO_PAGO, default=EFECTIVO, max_length=2)
@@ -145,3 +145,17 @@ class Factura(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class Tarifas(models.Model):
+    # id_tarifa = models.AutoField(unique=True)
+    n_dias = models.IntegerField()
+    fin_semana_bool = models.BooleanField()
+    n_kilometros = models.IntegerField(blank=True, null=True)
+    gama_coche = models.CharField(max_length=1)
+    cliente_empresa = models.BooleanField()
+    lista_extras = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'Tarifas'
