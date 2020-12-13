@@ -1,6 +1,7 @@
 import mimetypes
 import os
 
+from random import random
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.contrib.auth.forms import UserCreationForm
@@ -85,6 +86,27 @@ def create(request, pk):
     if Cliente.objects.get(id=pk) is None:
         raise Http404('Usuario no registrado')
     form = ReservaForm
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            car_id = form.cleaned_data['car']
+            fecha_res = form.cleaned_data['date_recogida']
+            fecha_obj = form.cleaned_data['date_deposicion']
+            fr_rec = form.cleaned_data['franquicia_recogida']
+            fr_dep = form.cleaned_data['franquicia_desposicion']
+            extras = form.cleaned_data['extras']
+            car_pk = request.POST.get('car', str(car_id).split('-')[1])
+            # algun lado por aqui habria que asignar el precio de una manera correcta y adecuada, pero como los de IS2 me sudan 3 cojones, el precio sera random
+            reserva = Reserva(cliente=Cliente.objects.get(id=pk), coche=Coche.objects.get(id=car_pk),
+                              fecha_reserva=fecha_res, fecha_objetivo=fecha_obj, franquicia_entrega=fr_dep,
+                              franquicia_recogida=fr_rec, precio=round(random()*1000, 1))
+            reserva.save()
+            met_pago = form.cleaned_data['met_pago']
+            factura = Factura(id_reserva=reserva, pago=met_pago)
+            factura.save()
+
+        return redirect('reservas', pk)
+
     coche_id = request.GET.get('coche_id', '')
     if coche_id != '':
         # context['coche_selected'] = [Coche.objects.get(id=coche_id)]

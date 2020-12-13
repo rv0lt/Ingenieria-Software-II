@@ -7,7 +7,7 @@
 <body>
     <h2>CREAR RESERVA</h2>
     <div class="form">
-        <form class="form" method="POST" action="{% url 'reservas' pk %}">
+        <form class="form" method="POST" action="">
             {% csrf_token %}
             Coche: {{ form.car }}
             <div id="date_selector">
@@ -17,6 +17,7 @@
             <div>
                 Seleccionar Extras: {{ form.extras }}
             </div>
+            Metodo de Pago: {{ form.met_pago }}
             <input type="submit" value="Crear reserva">
         </form>
     </div>

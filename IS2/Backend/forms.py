@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import Cliente, Coche, Reserva
+from .models import Cliente, Coche, Reserva, Factura
 from django import forms
 from django.forms import ModelForm, CharField, IntegerField, PasswordInput, NumberInput
 
@@ -85,5 +85,4 @@ class ReservaForm(forms.Form):
     franquicia_recogida = forms.ChoiceField(choices=Reserva.FRANQUICIAS)
     franquicia_desposicion = forms.ChoiceField(choices=Reserva.FRANQUICIAS)
     extras = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, choices=EXTRAS)
-
-     
+    met_pago = forms.ChoiceField(choices=Factura.TIPO_PAGO)
