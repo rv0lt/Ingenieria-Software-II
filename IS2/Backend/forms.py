@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import Cliente, Coche
+from .models import Cliente, Coche, Reserva
 from django import forms
 from django.forms import ModelForm, CharField, IntegerField, PasswordInput, NumberInput
 
@@ -76,12 +76,14 @@ class DateInput(forms.DateInput):
 
 
 class ReservaForm(forms.Form):
-    FRANQUICIAS = [('1', 'oficina 1'), ('2', 'oficina 2'), ('3', 'oficina 3'), ('4', 'oficina 4')]
+    # FRANQUICIAS = [('1', 'oficina 1'), ('2', 'oficina 2'), ('3', 'oficina 3'), ('4', 'oficina 4')]
+    EXTRAS = [('NAV', 'Navegador'), ('CAD', 'Cadenas de nieve'), ('NIN', 'Asiento de niño'), ('SEG', 'Seguro adicional')]
 
-    car = forms.ModelChoiceField(queryset= Coche.objects.all().order_by('modelo'))
+    car = forms.ModelChoiceField(queryset=Coche.objects.all().order_by('modelo'))
     date_recogida = forms.DateField(widget=DateInput)
     date_deposicion = forms.DateField(widget=DateInput)
-    # franquicia_recogida = forms.ModelChoiceField(queryset=FRANQUICIAS)
-    # franquicia_desposicion = forms.ModelChoiceField(queryset=FRANQUICIAS)
-    ##TODO EXTRAS
+    franquicia_recogida = forms.ChoiceField(choices=Reserva.FRANQUICIAS)
+    franquicia_desposicion = forms.ChoiceField(choices=Reserva.FRANQUICIAS)
+    extras = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, choices=EXTRAS)
+
      

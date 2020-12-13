@@ -5,11 +5,19 @@
     <title>Reservar Coche</title>
 </head>
 <body>
-    <h2>CREAR RESERVA [TODO]</h2>
+    <h2>CREAR RESERVA</h2>
     <div class="form">
-        <form class="form" method="POST" action="">
+        <form class="form" method="POST" action="{% url 'reservas' pk %}">
             {% csrf_token %}
-
+            Coche: {{ form.car }}
+            <div id="date_selector">
+            Fecha inicio: {{ form.date_recogida}} | Fecha fin:{{ form.date_deposicion}}
+            </div>
+            Franquicia recogida: {{ form.franquicia_recogida }} | Franquicia deposicion: {{ form.franquicia_desposicion }}
+            <div>
+                Seleccionar Extras: {{ form.extras }}
+            </div>
+            <input type="submit" value="Crear reserva">
         </form>
     </div>
 </body>

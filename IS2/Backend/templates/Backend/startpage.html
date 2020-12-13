@@ -21,8 +21,8 @@
     <hr>
     <form id="filtros" action="{% url 'user home' pk %}">
         <div id="date_selector">
-            Fecha inicio: <input type="date" id="start" name="fecha_start" value={{ today }} min={{ today }}>
-            Fecha final: <input type="date" id="end" name="fecha_end" value={{ today }} min={{ today }}>
+            Fecha inicio: <input type="date" id="start" name="fecha_start" value={{ fecha_ini }} min={{ today }}>
+            Fecha final: <input type="date" id="end" name="fecha_end" value={{ fecha_fin }} min={{ today }}>
         </div>
         <div id="coches">
             Marca: <select name="marcas" >
@@ -42,7 +42,7 @@
                         {% endfor %}
                     </select>
         </div>
-        <input type="submit" value="Filtrar">
+        <input type="submit" value="Filtrar" class="submit">
     </form>
     </div>
     <hr>
@@ -51,7 +51,12 @@
         <u1>
         {% block content %}
             {% for coche in object_list %}
-                <p>{{ coche }}</p>
+                <p>
+                <form action="{% url 'create reserva' pk %}">
+                    {{ coche }}<input type="submit" value="Reservar">
+                    <input name="coche_id" value="{{ coche.id }}" hidden>
+                </form>
+                </p>
             {% endfor %}
         {% endblock %}
         </u1>

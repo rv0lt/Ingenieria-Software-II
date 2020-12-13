@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 # Create your views here.
 from .models import *
-from .forms import RegisterUserForm, LoginUserForm
+from .forms import RegisterUserForm, LoginUserForm, ReservaForm
 from django.views.generic import ListView
 
 
@@ -59,14 +59,13 @@ def register(request):
 def start(request, pk):
     if Cliente.objects.get(id=pk) is None:
         raise Http404('Usuario no registrado')
-    context = {'pk': pk, 'cliente': Cliente.objects.get(id=pk), 'today': datetime.date.today(), 'marcas': Marca.objects.all(),
-               'gamas': [('A', 'Alta'), ('M', 'Media'),
-                         ('B', 'Baja')]}
+    context = {'pk': pk, 'cliente': Cliente.objects.get(id=pk), 'today': datetime.date.today().strftime('YYYY-MM-dd'),
+               'marcas': Marca.objects.all(), 'gamas': [('A', 'Alta'), ('M', 'Media'), ('B', 'Baja')]}
 
     marca = request.GET.get('marcas', '')
     gama = request.GET.get('gamas', '')
-    fecha_ini = request.GET.get('fecha_start', datetime.date.today())
-    fecha_fin = request.GET.get('fecha_end', datetime.date.today())
+    fecha_ini = request.GET.get('fecha_start', '')
+    fecha_fin = request.GET.get('fecha_end', '')
     queryset = Coche.objects.all()
     if gama != '':
         context['current_gama'] = gama
@@ -74,13 +73,24 @@ def start(request, pk):
     if marca != '':
         context['current_marca'] = marca
         queryset = [i for i in queryset if i.modelo.marca_fk.marca == marca]
+    if fecha_ini != '' and fecha_fin != '':
+        context['fecha_fin'] = fecha_fin
+        context['fecha_ini'] = fecha_ini
     context['object_list'] = queryset
     # TODO: Filtrar fechas de coches disponibles
     return render(request, 'Backend/startpage.html', context)
 
 
 def create(request, pk):
-    return render(request, 'Backend/createreserva.html')
+    if Cliente.objects.get(id=pk) is None:
+        raise Http404('Usuario no registrado')
+    form = ReservaForm
+    coche_id = request.GET.get('coche_id', '')
+    if coche_id != '':
+        # context['coche_selected'] = [Coche.objects.get(id=coche_id)]
+        form = ReservaForm(initial={'car': Coche.objects.get(id=coche_id)})
+    context = {'form': form, 'coches': Coche.objects.all(), 'pk': pk}
+    return render(request, 'Backend/createreserva.html', context)
 
 
 def reservas(request, pk):
