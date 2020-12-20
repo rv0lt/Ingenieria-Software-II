@@ -77,6 +77,7 @@ def start(request, pk):
     if fecha_ini != '' and fecha_fin != '':
         context['fecha_fin'] = fecha_fin
         context['fecha_ini'] = fecha_ini
+        queryset = [i for i in queryset if i.estado == 'D']
     context['object_list'] = queryset
     # TODO: Filtrar fechas de coches disponibles
     return render(request, 'Backend/startpage.html', context)
@@ -119,7 +120,7 @@ def reservas(request, pk):
     if Cliente.objects.get(id=pk) is None:
         raise Http404('Usuario no registrado')
     context = {'pk': pk, 'cliente': Cliente.objects.get(id=pk)}
-    queryset = [i for i in Reserva.objects.all() if i.cliente_id == pk]
+    queryset = [i for i in Reserva.objects.all().order_by('-id') if i.cliente_id == pk]
     context['lista_reservas'] = queryset
     return render(request, 'Backend/consultarreserva.html', context)
 
